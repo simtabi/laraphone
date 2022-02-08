@@ -64,6 +64,6 @@ return [
          * utilsScript
          * - path to the utils.js file in public/ directory.
          */
-        'utilsScript'           => '/vendor/laraphone/utils.js',
+        'utilsScript'           => '/vendor/laraphone/js/utils.js',
     ]
 ];

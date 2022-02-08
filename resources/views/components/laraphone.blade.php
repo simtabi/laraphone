@@ -12,6 +12,7 @@
             $errorMessage         = $getErrorMessage($errors, $locale);
             $validationClass      = $getValidationClass($errors, $locale);
             $isWired              = $componentIsWired();
+            $wiredKey             = !empty($getWireNestedKey()) ? $getWireNestedKey().'.'.$name : $name;
         @endphp
 
         {{-- Hidden phone input --}}
@@ -37,7 +38,7 @@
                         <x-gesanda::form-addon :addon="$prepend"/>
                     @endif
                 <input {{ $attributes->except('wire')->merge([
-                'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $name . '.' . $locale : $name) : null,
+                'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $wiredKey . '.' . $locale : $wiredKey) : null,
                 'id'                                           => $id,
                 'class'                                        => 'iti--laraphone form-control' . ($validationClass ? ' ' . $validationClass : null) . ' ' . $attributes->get('class'),
                 'type'                                         => $type,

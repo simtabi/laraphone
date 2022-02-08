@@ -36,6 +36,7 @@ class TelInput extends AbstractComponent
         protected string|null                   $id                       = null,
         public    string                        $type                     = 'tel',
         protected array|object|null             $bind                     = null,
+        protected string|null                   $wireNestedKey            = null,
         protected string|false|null             $label                    = null,
         protected bool|null                     $floatingLabel            = null,
         protected string|false|null             $placeholder              = null,

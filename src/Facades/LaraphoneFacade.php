@@ -1,6 +1,6 @@
 <?php
 
-namespace Simtabi\Laraphone;
+namespace Simtabi\Laraphone\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

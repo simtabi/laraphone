@@ -54,10 +54,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Simtabi\\Laraphone\\LaraphoneServiceProvider"
+                "Simtabi\\Laraphone\\Providers\\LaraphoneServiceProvider"
             ],
             "aliases": {
-                "Laraphone": "Simtabi\\Laraphone\\LaraphoneFacade"
+                "Laraphone": "Simtabi\\Laraphone\\Facades\\LaraphoneFacade"
             }
         }
     }

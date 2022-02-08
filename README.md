@@ -100,7 +100,7 @@ Update your `webpack.mix.js` to copy the `utils.js ` script to your `public` dir
 ```javascript
 // webpack.mix.js
 // ...
-mix.copy('node_modules/intl-tel-input/build/js/utils.js', 'public/vendor/intl-tel-input/utils.js');
+mix.copy('node_modules/intl-tel-input/build/js/utils.js', 'public/vendor/laraphone/js/utils.js');
 ```
 
 <a name="configuration"></a>

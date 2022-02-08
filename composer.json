@@ -1,0 +1,64 @@
+{
+    "name": "simtabi/laraphone",
+    "description": "Laravel Telephone Input component for Blade and Livewire based on the intl-tel-input JavaScript plugin.",
+    "keywords": [
+        "simtabi",
+        "laraphone",
+        "livewire-tel-input",
+        "tel-input",
+        "intl-tel-input",
+        "telephone-input",
+        "international-telephone-input",
+        "laravel",
+        "livewire",
+        "laravel-livewire",
+        "laravel-blade",
+        "blade"
+    ],
+    "homepage": "https://github.com/simtabi/laraphone",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Imani",
+            "email": "imani@simatbi.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Simtabi\\Laraphone\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Simtabi\\Laraphone\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Simtabi\\Laraphone\\LaraphoneServiceProvider"
+            ],
+            "aliases": {
+                "Laraphone": "Simtabi\\Laraphone\\LaraphoneFacade"
+            }
+        }
+    }
+}

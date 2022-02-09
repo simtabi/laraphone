@@ -12,7 +12,7 @@
             $errorMessage         = $getErrorMessage($errors, $locale);
             $validationClass      = $getValidationClass($errors, $locale);
             $isWired              = $componentIsWired();
-            $wiredKey             = !empty($getWireNestedKey()) ? $getWireNestedKey().'.'.$name : $name;
+            $wiredKey             = !empty($getNestedWireKey()) ? $getNestedWireKey().'.'.$name : $name;
         @endphp
 
         {{-- Hidden phone input --}}

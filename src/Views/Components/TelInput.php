@@ -3,61 +3,63 @@
 namespace Simtabi\Laraphone\Views\Components;
 
 use Closure;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\View\Component;
-use Simtabi\Gesanda\Abstracts\AbstractComponent;
-use Simtabi\Gesanda\Traits\Form\CanBeWired;
-use Simtabi\Gesanda\Traits\Form\HasAddon;
-use Simtabi\Gesanda\Traits\Form\HasFloatingLabel;
-use Simtabi\Gesanda\Traits\Form\HasId;
-use Simtabi\Gesanda\Traits\Form\HasLabel;
-use Simtabi\Gesanda\Traits\Form\HasName;
-use Simtabi\Gesanda\Traits\Form\HasPlaceholder;
-use Simtabi\Gesanda\Traits\Form\HasValidation;
+use Simtabi\Gesanda\Abstracts\FormInputTemplate;
 use Simtabi\Gesanda\Traits\Form\HasValue;
 
-class TelInput extends AbstractComponent
+class TelInput extends FormInputTemplate
 {
-    use HasId;
-    use HasName;
-    use HasLabel;
-    use HasFloatingLabel;
+
     use HasValue;
-    use HasPlaceholder;
-    use HasAddon;
-    use HasValidation;
-    use CanBeWired;
 
     /** @SuppressWarnings(PHPMD.ExcessiveParameterList) */
     public function __construct(
-        public    string                        $name                     = 'phone',
-        protected string|null                   $id                       = null,
-        public    string                        $type                     = 'tel',
-        protected array|object|null             $bind                     = null,
-        protected string|false|null             $label                    = null,
-        protected bool|null                     $floatingLabel            = null,
-        protected string|false|null             $placeholder              = null,
-        protected string|Closure|null           $prepend                  = null,
-        protected string|Closure|null           $append                   = null,
-        protected string|int|array|Closure|null $value                    = null,
-        public    string|null                   $caption                  = null,
-        protected bool|null                     $displayValidationSuccess = null,
-        protected bool|null                     $displayValidationFailure = null,
-        protected string|null                   $errorBag                 = null,
-        public    array                         $locales                  = [null],
-        public    bool                          $marginBottom             = true
+        string                        $name                     = 'phone',
+        string|null                   $id                       = null,
+        string|false|null             $placeholder              = null,
+        array|object|null             $bind                     = null,
+        string|false|null             $label                    = null,
+        bool|null                     $floatingLabel            = null,
+        string|Closure|null           $prepend                  = null,
+        string|Closure|null           $append                   = null,
+        string|int|array|Closure|null $value                    = null,
+        string|null                   $caption                  = null,
+        bool|null                     $displayValidationSuccess = null,
+        bool|null                     $displayValidationFailure = null,
+        string|null                   $errorBag                 = null,
+        array                         $locales                  = [null],
+        bool                          $marginBottom             = true,
+        string|null                   $nestedWireKey            = null,
+        string                        $type                     = 'tel',
     ) {
 
-        parent::__construct();
+        if (empty($name)) {
+            $name = 'phone-' . uniqid();
+        }
+        
+        if (empty($id)) {
+            $id = $name;
+        }
 
-        if (!$this->name) {
-            $this->name = 'phone-' . uniqid();
-        }
-        if (!$this->id) {
-            $this->id = $this->name;
-        }
+        parent::__construct(
+            $name,
+            $id,
+            $placeholder,
+            $bind,
+            $label,
+            $floatingLabel,
+            $prepend,
+            $append,
+            $value,
+            $caption,
+            $displayValidationSuccess,
+            $displayValidationFailure,
+            $errorBag,
+            $locales,
+            $marginBottom,
+            $nestedWireKey,
+            $type,
+        );
+
     }
 
     protected function setViewPath(): string

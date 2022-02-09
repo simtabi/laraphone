@@ -56,7 +56,7 @@ return [
 
         'placeholderNumberType' => 'MOBILE',
 
-        'preferredCountries'    => ['UG', 'KE', 'US', 'GB', 'TZ'],
+        'preferredCountries'    => ['US', 'KE',],
 
         'separateDialCode'      => false,
 

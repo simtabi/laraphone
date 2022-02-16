@@ -77,8 +77,8 @@ class LaraphoneServiceProvider extends ServiceProvider
         Blade::component('laraphone::input', TelInput::class);
 
         View::composer('laraphone::assets', function ($view) {
-            $view->laraphoneCssPath = __DIR__ . '/../../public/css/laraphone.css';
-            $view->laraphoneJsPath  = __DIR__.'/../../public/js/laraphone.js';
+            $view->laraphoneCssPath = self::PATH . 'public/css/laraphone.css';
+            $view->laraphoneJsPath  = self::PATH.'public/js/laraphone.js';
         });
 
         Blade::include('laraphone::scripts', 'laraphoneScripts');

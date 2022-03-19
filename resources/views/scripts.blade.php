@@ -1,5 +1,5 @@
 @laraphoneJs
 
 <script>
-    var laraphoneConfig = @json(config('laraphone.intlTelInput'));
+    var laraphoneConfig = @json(config('laraphone'));
 </script>

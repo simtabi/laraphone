@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Laravel International Telephone Input configurations
  *
@@ -6,64 +7,63 @@
  * https://github.com/jackocnr/intl-tel-input
  */
 return [
-    'intlTelInput'        => [
-        'allowDropdown'         => true,
 
-        'autoHideDialCode'      => true,
+    'allowDropdown'           => true,
 
-        /**
-         * autoPlaceholder
-         *    1. 'polite' - core plugin default
-         *    2. 'aggressive'
-         */
-        'autoPlaceholder'       => 'aggressive',
+    'autoHideDialCode'        => true,
 
-        'customContainer'       => '',
+    /**
+     * autoPlaceholder
+     *    1. 'polite' - core plugin default
+     *    2. 'aggressive'
+     */
+    'autoPlaceholder'         => 'aggressive',
 
-        /**
-         * customPlaceholder
-         *    1. null - core plugin default
-         *    2. 'ACustomFunctionName' - Create your javascript function with the specified custom name and bind to window as window.ACustomFunctionName.
-         *
-         * see: https://github.com/jackocnr/intl-tel-input#initialisation-options
-         */
-        'customPlaceholder'     => null,
+    'customContainer'         => '',
 
-        'dropdownContainer'     => null,
+    /**
+     * customPlaceholder
+     *    1. null - core plugin default
+     *    2. 'ACustomFunctionName' - Create your javascript function with the specified custom name and bind to window as window.ACustomFunctionName.
+     *
+     * see: https://github.com/jackocnr/intl-tel-input#initialisation-options
+     */
+    'customPlaceholder'       => null,
 
-        'excludeCountries'      => [],
+    'dropdownContainer'       => null,
 
-        'formatOnDisplay'       => true,
+    'excludeCountries'        => [],
 
-        /**
-         * geoIpLookup
-         *    1. null - core plugin default
-         *    2. 'ipinfo' - Predefined lookups for IP addresses implementation using free service from https://ipinfo.io.
-         *                - The lookup result for each tel input is stored in a cookie to avoid repeat lookups.
-         *    3. 'ACustomFunctionName' - Create your javascript function with the specified custom name and bind to window as window.ACustomFunctionName.
-         *
-         * see: https://github.com/jackocnr/intl-tel-input#initialisation-options
-         */
-        'geoIpLookup'           => 'ipinfo',
+    'formatOnDisplay'         => true,
 
-        'initialCountry'        => 'auto',
+    /**
+     * geoIpLookup
+     *    1. null - core plugin default
+     *    2. 'ipinfo' - Predefined lookups for IP addresses implementation using free service from https://ipinfo.io.
+     *                - The lookup result for each tel input is stored in a cookie to avoid repeat lookups.
+     *    3. 'ACustomFunctionName' - Create your javascript function with the specified custom name and bind to window as window.ACustomFunctionName.
+     *
+     * see: https://github.com/jackocnr/intl-tel-input#initialisation-options
+     */
+    'geoIpLookup'            => 'ipinfo',
 
-        'localizedCountries'    => [],
+    'initialCountry'         => 'auto',
 
-        'nationalMode'          => true,
+    'localizedCountries'     => [],
 
-        'onlyCountries'         => [],
+    'nationalMode'           => true,
 
-        'placeholderNumberType' => 'MOBILE',
+    'onlyCountries'          => [],
 
-        'preferredCountries'    => ['US', 'KE',],
+    'placeholderNumberType'  => 'MOBILE',
 
-        'separateDialCode'      => false,
+    'preferredCountries'     => ['CN', 'NG', 'US', 'GB', 'KE'],
 
-        /**
-         * utilsScript
-         * - path to the utils.js file in public/ directory.
-         */
-        'utilsScript'           => '/vendor/laraphone/js/intl-tel-input-utils.js',
-    ]
+    'separateDialCode'       => false,
+
+    /**
+     * utilsScript
+     * - path to the utils.js file in public/ directory.
+     */
+    'utilsScript'            => '/vendor/laraphone/js/utils.js',
 ];

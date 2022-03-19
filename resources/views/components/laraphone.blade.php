@@ -24,7 +24,7 @@
 
     {{-- Tel input --}}
 
-    <div @class(['form-floating' => $displayFloatingLabel, 'mb-3' => $marginBottom])>
+    <div @class(['form-floating' => $displayFloatingLabel, 'mb-3' => $marginBottom])  wire:ignore>
         @if(($prepend || $append) && ! $displayFloatingLabel)
             <x-gesanda::form-label :id="$id" class="form-label" :label="$label"/>
             <div class="input-group">
@@ -36,19 +36,18 @@
                     <x-gesanda::form-addon :addon="$prepend"/>
                 @endif
 
-                <div class="{{$validationClass}} wire-validation" >
-                    <div wire:ignore>
+                <div class="{{$validationClass}} wire-validation " >
                         <input {{ $attributes->except('wire')->merge([
                         'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $wiredKey . '.' . $locale : $wiredKey) : null,
                         'id'                                           => $id,
-                        'class'                                        => 'iti--laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
+                        'class'                                        => 'laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
                         'type'                                         => $type,
                         'name'                                         => $isWired ? null : ($locale ? $name . '[' . $locale . ']' : $name),
                         'placeholder'                                  => $placeholder,
                         'data-locale'                                  => $locale,
                         'value'                                        => $isWired ? null : ($value ?? ''),
                         'aria-describedby'                             => $caption ? $id . '-caption' : null,
-                    ]) }}
+                        ]) }}
 
                                data-phone-input-id="{{ $id }}"
                                data-phone-input-name="{{ $name }}"
@@ -75,7 +74,6 @@
                                @endif
                                autocomplete="off"
                         />
-                    </div>
                 </div>
                 @if(! $prepend && ! $append && $displayFloatingLabel)
                     <x-gesanda::form-label :id="$id" class="form-label" :label="$label"/>

@@ -81,10 +81,15 @@
                 @if($append && ! $displayFloatingLabel)
                     <x-gesanda::form-addon :addon="$append"/>
                 @endif
-                <x-gesanda::error :message="$errorMessage"/>
+
+                @if($showInputError && !empty($errorMessage))
+                    <x-gesanda::errors :message="$errorMessage"/>
+                @endif
+
                 @if (empty($errorMessage))
                     <x-gesanda::form-caption :inputId="$id" :caption="$caption"/>
                 @endif
+
                 @if(($prepend || $append) && ! $displayFloatingLabel)
             </div>
         @endif

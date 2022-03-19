@@ -30,6 +30,7 @@ class TelInput extends FormInputTemplate
         bool                          $marginBottom             = true,
         string|null                   $nestedWireKey            = null,
         string                        $type                     = 'tel',
+        bool                          $showInputError           = true,
     ) {
 
         if (empty($name)) {
@@ -58,6 +59,7 @@ class TelInput extends FormInputTemplate
             $marginBottom,
             $nestedWireKey,
             $type,
+            $showInputError,
         );
 
     }

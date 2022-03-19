@@ -268,9 +268,9 @@
 
   function renderTelInput()
   {
-    // Call function to initialize an instance of int tel input on all elements with .laraphone attribute
+    // Call function to initialize an instance of int tel input on all elements with .iti--laraphone attribute
     const telInputconfig = laraphoneConfig; // laraphoneConfig will be defined in blade
-    const telInputs = document.querySelectorAll(".laraphone");
+    const telInputs = document.querySelectorAll(".iti--laraphone");
     if (telInputs.length > 0) {
       for (let i = 0; i < telInputs.length; i++) {
         initTelInput(telInputs[i], telInputconfig);

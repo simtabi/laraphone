@@ -40,7 +40,7 @@
                         <input {{ $attributes->except('wire')->merge([
                         'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $wiredKey . '.' . $locale : $wiredKey) : null,
                         'id'                                           => $id,
-                        'class'                                        => 'laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
+                        'class'                                        => 'iti--laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
                         'type'                                         => $type,
                         'name'                                         => $isWired ? null : ($locale ? $name . '[' . $locale . ']' : $name),
                         'placeholder'                                  => $placeholder,

@@ -1,1 +1,298 @@
-(()=>{var e,t={166:()=>{if("function"!=typeof window.intlTelInput)throw new TypeError("Laraphone: requires International Telephone Input (https://github.com/jackocnr/intl-tel-input). Please install with NPM or include the CDN.");!function(){"use strict";function e(e,t){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null,o=arguments.length>3&&void 0!==arguments[3]?arguments[3]:null,i=arguments.length>4&&void 0!==arguments[4]?arguments[4]:null,a="".concat(e,"=").concat(t,";");if(n){var r=new Date;r.setTime(r.getTime()+24*n*60*60*1e3),a+="expires=".concat(r.toUTCString(),";")}o&&(a+="path=".concat(o,";")),i&&(a+="domain=".concat(i,";")),document.cookie=a}function t(e){for(var t=e+"=",n=document.cookie.split(";"),o=0;o<n.length;o++){for(var i=n[o];" "==i.charAt(0);)i=i.substring(1);if(0==i.indexOf(t))return i.substring(t.length,i.length)}return""}function n(n){var o=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{},i="IntlTelInputSelectedCountry_".concat(n.dataset.phoneInputId);window.intlTelInputGlobals.autoCountry=t(i)||window.intlTelInputGlobals.autoCountry;var a=n.closest("form");if(a&&a.setAttribute("autocomplete","off"),null==o.geoIpLookup)delete o.geoIpLookup;else if("ipinfo"===o.geoIpLookup)o.geoIpLookup=function(n,o){var a=t(i);a?n(a):fetch("https://ipinfo.io/json").then((function(e){return e.json()})).then((function(e){return e})).then((function(t){var o,a=null===(o=t.country)||void 0===o?void 0:o.toUpperCase();n(a),e(i,a)})).catch((function(e){return n("US")}))};else if("function"==typeof window[o.geoIpLookup])o.geoIpLookup=window[o.geoIpLookup];else{if("function"!=typeof o.geoIpLookup)throw new TypeError("Laraphone: Undefined function '".concat(o.geoIpLookup,"' specified in tel-input.options.geoIpLookup."));delete o.geoIpLookup}if(null==o.customPlaceholder)delete o.customPlaceholder;else if("function"==typeof window[o.customPlaceholder])o.customPlaceholder=window[o.customPlaceholder];else{if("function"!=typeof o.customPlaceholder)throw new TypeError("Laraphone: Undefined function '".concat(o.customPlaceholder,"' specified in tel-input.options.customPlaceholder."));delete o.customPlaceholder}o.utilsScript&&(o.utilsScript="/"==o.utilsScript.charAt(0)?o.utilsScript:"/"+o.utilsScript);var r=window.intlTelInput(n,o),u=function(){var t=r.getSelectedCountryData();if(t.iso2){var o;if(e(i,null===(o=t.iso2)||void 0===o?void 0:o.toUpperCase()),this.dataset.phoneCountryInput&&t.iso2){var a=document.querySelector(this.dataset.phoneCountryInput);if(a){var u,l,d=null===(u=a.value)||void 0===u?void 0:u.trim();a.value=null===(l=t.iso2)||void 0===l?void 0:l.toUpperCase(),a.value===d&&""==a.value||a.dispatchEvent(new KeyboardEvent("change"))}}if(this.dataset.phoneDialCodeInput&&t.dialCode){var c=document.querySelector(this.dataset.phoneDialCodeInput);if(c){var v=c.value;c.value=t.dialCode,c.value===v&&""==c.value||c.dispatchEvent(new KeyboardEvent("change"))}}n.dispatchEvent(new KeyboardEvent("change"))}},l=function(){if(this.dataset.phoneInput){var e=document.querySelector(this.dataset.phoneInput);if(e){var t,n,o,i,a=null===(t=e.value)||void 0===t?void 0:t.trim();if(""!=a&&"+"!=a.charAt(0)&&"0"!=a.charAt(0)&&null===r.isValidNumber()&&(a="+".concat(a),e.value=a),""!=(null===(n=r.getNumber())||void 0===n?void 0:n.trim())?r.isValidNumber()?e.value=r.getNumber():e.value="":""!=a&&null===r.isValidNumber()&&(r.setNumber(a),e.value=r.getNumber()),e.value===a||""==e.value||!0!==r.isValidNumber()&&null!==r.isValidNumber()){if(!1===r.isValidNumber())e.dispatchEvent(new KeyboardEvent("change")),e.dispatchEvent(new CustomEvent("telchange",{detail:{valid:!1,validNumber:e.value,number:r.getNumber(),country:null===(o=r.getSelectedCountryData().iso2)||void 0===o?void 0:o.toUpperCase(),countryName:r.getSelectedCountryData().name,dialCode:r.getSelectedCountryData().dialCode}}))}else e.dispatchEvent(new KeyboardEvent("change")),e.dispatchEvent(new CustomEvent("telchange",{detail:{valid:!0,validNumber:e.value,number:r.getNumber(),country:null===(i=r.getSelectedCountryData().iso2)||void 0===i?void 0:i.toUpperCase(),countryName:r.getSelectedCountryData().name,dialCode:r.getSelectedCountryData().dialCode}}))}}};if(n.addEventListener("countrychange",u),n.addEventListener("change",l),n.dataset.phoneInput){var d=document.querySelector(n.dataset.phoneInput);if(d){var c,v=null===(c=d.value)||void 0===c?void 0:c.trim();""!=v&&"+"!=v.charAt(0)&&"0"!=v.charAt(0)&&(v="+".concat(v)),d.addEventListener("change",(function(){var e,t=null===(e=this.value)||void 0===e?void 0:e.trim();t!=v&&""!=t&&r.setNumber(t)}))}}if(n.dataset.phoneCountryInput){var p=document.querySelector(n.dataset.phoneCountryInput);p&&p.addEventListener("change",(function(){var e;r.setCountry(null===(e=this.value)||void 0===e?void 0:e.trim())}))}n.dispatchEvent(new KeyboardEvent("countrychange")),document.addEventListener("turbolinks:load",(function(){n&&n.dispatchEvent(new KeyboardEvent("countrychange"))})),document.addEventListener("turbo:load",(function(){n&&n.dispatchEvent(new KeyboardEvent("countrychange"))}))}function o(){var e=laraphoneConfig,t=document.querySelectorAll(".laraphone");if(t.length>0)for(var o=0;o<t.length;o++)n(t[o],e)}document.addEventListener("DOMContentLoaded",(function(){o(),document.addEventListener("telDOMChanged",(function(){o()})),window.Livewire&&window.Livewire.hook("component.initialized",(function(e){o()}))}))}()},76:()=>{}},n={};function o(e){var i=n[e];if(void 0!==i)return i.exports;var a=n[e]={exports:{}};return t[e](a,a.exports,o),a.exports}o.m=t,e=[],o.O=(t,n,i,a)=>{if(!n){var r=1/0;for(c=0;c<e.length;c++){for(var[n,i,a]=e[c],u=!0,l=0;l<n.length;l++)(!1&a||r>=a)&&Object.keys(o.O).every((e=>o.O[e](n[l])))?n.splice(l--,1):(u=!1,a<r&&(r=a));if(u){e.splice(c--,1);var d=i();void 0!==d&&(t=d)}}return t}a=a||0;for(var c=e.length;c>0&&e[c-1][2]>a;c--)e[c]=e[c-1];e[c]=[n,i,a]},o.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),(()=>{var e={237:0,960:0};o.O.j=t=>0===e[t];var t=(t,n)=>{var i,a,[r,u,l]=n,d=0;for(i in u)o.o(u,i)&&(o.m[i]=u[i]);if(l)var c=l(o);for(t&&t(n);d<r.length;d++)a=r[d],o.o(e,a)&&e[a]&&e[a][0](),e[r[d]]=0;return o.O(c)},n=self.webpackChunk=self.webpackChunk||[];n.forEach(t.bind(null,0)),n.push=t.bind(null,n.push.bind(n))})(),o.O(void 0,[960],(()=>o(166)));var i=o.O(void 0,[960],(()=>o(76)));i=o.O(i)})();
+/**
+ * International Telephone Input
+ */
+if (typeof window.intlTelInput !== 'function') {
+    throw new TypeError(
+        'Laraphone: requires International Telephone Input (https://github.com/jackocnr/intl-tel-input). Please install with NPM or include the CDN.'
+    );
+}
+
+// LaravelTelInput
+(function () {
+
+    'use strict';
+
+    function setCookie(cookieName, cookieValue, expiryDays = null, path = null, domain = null) {
+        let cookieString = `${cookieName}=${cookieValue};`
+        if (expiryDays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
+            cookieString += `expires=${d.toUTCString()};`
+        }
+        if (path) {
+            cookieString += `path=${path};`
+        }
+        if (domain) {
+            cookieString += `domain=${domain};`
+        }
+        document.cookie = cookieString;
+    }
+
+    function getCookie(cookieName) {
+        let name = cookieName + "=";
+        let ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function removeCookie(cookieName, path = null, domain = null) {
+        let cookieString = `${cookieName}=;`
+        const d = new Date();
+        d.setTime(d.getTime() - (30 * 24 * 60 * 60 * 1000));
+        cookieString += `expires=${d.toUTCString()};`
+        if (path) {
+            cookieString += `path=${path};`
+        }
+        if (domain) {
+            cookieString += `domain=${domain};`
+        }
+        document.cookie = cookieString;
+    }
+
+    // init a tell input
+    function initTelInput(telInput, options = {})
+    {
+        // tel input country cookie
+        const IntlTelInputSelectedCountryCookie = `IntlTelInputSelectedCountry_${telInput.dataset.phoneInputId}`;
+
+        // allow each input to have its own initialCountry and geoIpLookup
+        window.intlTelInputGlobals.autoCountry = getCookie(IntlTelInputSelectedCountryCookie) || window.intlTelInputGlobals.autoCountry;
+        // window.intlTelInputGlobals.startedLoadingAutoCountry = false;
+
+        // fix autofill bugs on page refresh in Firefox
+        let form = telInput.closest('form');
+        if (form) {
+            form.setAttribute('autocomplete', 'off');
+        }
+
+        // geoIpLookup option
+        if (options.geoIpLookup == null) {
+            // unset it if null
+            delete options.geoIpLookup;
+        } else if (options.geoIpLookup === 'ipinfo') {
+            options.geoIpLookup = function(success, failure) {
+                let country = getCookie(IntlTelInputSelectedCountryCookie);
+                if (country) {
+                    success(country);
+                } else {
+                    fetch('https://ipinfo.io/json')
+                        .then( res => res.json() )
+                        .then( data => data)
+                        .then( (data) => {
+                            let country = data.country?.toUpperCase();
+                            success(country);
+                            setCookie(IntlTelInputSelectedCountryCookie, country);
+                        })
+                        .catch( error => success('US') );
+                }
+            }
+        } else if (typeof window[options.geoIpLookup] === 'function') {
+            // user custom function
+            options.geoIpLookup = window[options.geoIpLookup];
+        } else {
+            if (typeof options.geoIpLookup !== 'function') {
+                throw new TypeError(
+                    `Laraphone: Undefined function '${options.geoIpLookup}' specified in tel-input.options.geoIpLookup.`
+                );
+            }
+            delete options.geoIpLookup; // unset if undefined function
+        }
+
+        // customPlaceholder option
+        if (options.customPlaceholder == null) {
+            // unset if its null
+            delete options.customPlaceholder;
+        } else if (typeof window[options.customPlaceholder] === 'function') {
+            // user custom function
+            options.customPlaceholder = window[options.customPlaceholder];
+        } else {
+            if (typeof options.customPlaceholder !== 'function') {
+                throw new TypeError(
+                    `Laraphone: Undefined function '${options.customPlaceholder}' specified in tel-input.options.customPlaceholder.`
+                );
+            }
+            delete options.customPlaceholder; // unset if undefined function
+        }
+
+        // utilsScript option
+        if (options.utilsScript) {
+            // Fix utilsScript relative path bug
+            options.utilsScript = options.utilsScript.charAt(0) == '/' ? options.utilsScript : '/' + options.utilsScript;
+        }
+
+        // init the tel input
+        const itiPhone = window.intlTelInput(telInput, options);
+
+
+        // countrychange event function
+        const countryChangeEventFunc = function () {
+
+            let countryData = itiPhone.getSelectedCountryData();
+            if (countryData.iso2) {
+                setCookie(IntlTelInputSelectedCountryCookie, countryData.iso2?.toUpperCase());
+
+                // phone country input data
+                if (this.dataset.phoneCountryInput && countryData.iso2) {
+                    const phoneCountryInput = document.querySelector(this.dataset.phoneCountryInput);
+                    if (phoneCountryInput) {
+                        let oldValue = phoneCountryInput.value?.trim();
+                        phoneCountryInput.value = countryData.iso2?.toUpperCase();
+                        if (phoneCountryInput.value !== oldValue || phoneCountryInput.value != '') {
+                            phoneCountryInput.dispatchEvent(new KeyboardEvent('change'));
+                        }
+                    }
+                }
+                // phone dial code input data
+                if (this.dataset.phoneDialCodeInput && countryData.dialCode) {
+                    const phoneDialCodeInput = document.querySelector(this.dataset.phoneDialCodeInput);
+                    if (phoneDialCodeInput) {
+                        let oldValue = phoneDialCodeInput.value;
+                        phoneDialCodeInput.value = countryData.dialCode;
+                        if (phoneDialCodeInput.value !== oldValue || phoneDialCodeInput.value != '') {
+                            phoneDialCodeInput.dispatchEvent(new KeyboardEvent('change'));
+                        }
+                    }
+                }
+                // once country change trigger change event on the telephone input
+                telInput.dispatchEvent(new KeyboardEvent('change'));
+            }
+        }
+
+        // countrychange event function
+        const telInputChangeEventFunc = function () {
+            // phone input data
+            if (this.dataset.phoneInput) {
+                const phoneInput = document.querySelector(this.dataset.phoneInput);
+                if (phoneInput) {
+                    let oldValue = phoneInput.value?.trim();
+                    if (oldValue != '' && oldValue.charAt(0) != '+'  && oldValue.charAt(0) != '0' && itiPhone.isValidNumber() === null) {
+                        oldValue = `+${oldValue}`;
+                        phoneInput.value = oldValue;
+                    }
+                    if (itiPhone.getNumber()?.trim() != '') {
+                        if (itiPhone.isValidNumber()) {
+                            phoneInput.value = itiPhone.getNumber();
+                        } else {
+                            phoneInput.value = '';
+                        }
+                    } else {
+                        if (oldValue != '' && itiPhone.isValidNumber() === null) {
+                            itiPhone.setNumber(oldValue);
+                            phoneInput.value = itiPhone.getNumber();
+                        }
+                    }
+                    if (phoneInput.value !== oldValue && phoneInput.value != '' && (itiPhone.isValidNumber() === true || itiPhone.isValidNumber() === null)) {
+                        phoneInput.dispatchEvent(new KeyboardEvent('change'));
+                        phoneInput.dispatchEvent(new CustomEvent('telchange', {
+                            detail: {
+                                valid: true,
+                                validNumber: phoneInput.value,
+                                number: itiPhone.getNumber(),
+                                country: itiPhone.getSelectedCountryData().iso2?.toUpperCase(),
+                                countryName: itiPhone.getSelectedCountryData().name,
+                                dialCode: itiPhone.getSelectedCountryData().dialCode
+                            }
+                        }));
+                    } else {
+                        if (itiPhone.isValidNumber() === false) {
+                            phoneInput.dispatchEvent(new KeyboardEvent('change'));
+                            phoneInput.dispatchEvent(new CustomEvent('telchange', {
+                                detail: {
+                                    valid: false,
+                                    validNumber: phoneInput.value,
+                                    number: itiPhone.getNumber(),
+                                    country: itiPhone.getSelectedCountryData().iso2?.toUpperCase(),
+                                    countryName: itiPhone.getSelectedCountryData().name,
+                                    dialCode: itiPhone.getSelectedCountryData().dialCode
+                                }
+                            }));
+                        }
+                    }
+                }
+            }
+        }
+
+        // Listen the tel inputs events
+        telInput.addEventListener('countrychange', countryChangeEventFunc);
+        telInput.addEventListener('change', telInputChangeEventFunc);
+
+        // listen and sync phone number with tel input if any
+        if (telInput.dataset.phoneInput) {
+            const phoneInput = document.querySelector(telInput.dataset.phoneInput);
+            if (phoneInput) {
+                let oldValue = phoneInput.value?.trim();
+                if (oldValue != '' && oldValue.charAt(0) != '+' && oldValue.charAt(0) != '0') {
+                    oldValue = `+${oldValue}`;
+                }
+                phoneInput.addEventListener('change', function () {
+                    let newValue = this.value?.trim();
+                    if (newValue != oldValue && newValue != '') {
+                        itiPhone.setNumber(newValue);
+                    }
+                });
+            }
+        }
+        // listen and sync phone country with tel input if any
+        if (telInput.dataset.phoneCountryInput) {
+            const phoneCountryInput = document.querySelector(telInput.dataset.phoneCountryInput);
+            if (phoneCountryInput) {
+                phoneCountryInput.addEventListener('change', function () {
+                    itiPhone.setCountry(this.value?.trim());
+                });
+            }
+        }
+
+        // After each intlTelInput instance has been created, fix issues with pre-filled values by dispatching change event on the country dropdown
+        telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+        // Fix issues working on page with Turbolinks enabled
+        document.addEventListener("turbolinks:load", function() {
+            if (telInput) {
+                telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+            }
+        });
+        // Fix issues working on page with Turbo enabled
+        document.addEventListener("turbo:load", function() {
+            if (telInput) {
+                telInput.dispatchEvent(new KeyboardEvent('countrychange'));
+            }
+        });
+    }
+
+    function renderTelInput()
+    {
+        // Call function to initialize an instance of int tel input on all elements with .iti--laraphone attribute
+        const telInputconfig = laraphoneConfig; // laraphoneConfig will be defined in blade
+        const telInputs = document.querySelectorAll(".iti--laraphone");
+        if (telInputs.length > 0) {
+            for (let i = 0; i < telInputs.length; i++) {
+                initTelInput(telInputs[i], telInputconfig);
+            }
+        }
+    }
+
+    // Listen to the document events and re-render the tel inputs
+    document.addEventListener("DOMContentLoaded", function() {
+        renderTelInput();
+
+        // user dispatched browser events to re-render the tel inputs
+        document.addEventListener("telDOMChanged", function() {
+            renderTelInput();
+        });
+
+        // Livewire event hook
+        if (window.Livewire) {
+            window.Livewire.hook('component.initialized', component => {
+                renderTelInput();
+            });
+        }
+    });
+    //
+})();

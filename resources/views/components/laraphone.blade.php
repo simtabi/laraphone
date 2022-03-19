@@ -24,7 +24,7 @@
 
     {{-- Tel input --}}
 
-    <div @class(['form-floating' => $displayFloatingLabel, 'mb-3' => $marginBottom])  wire:ignore>
+    <div @class(['form-floating' => $displayFloatingLabel, 'mb-3' => $marginBottom])>
         @if(($prepend || $append) && ! $displayFloatingLabel)
             <x-gesanda::form-label :id="$id" class="form-label" :label="$label"/>
             <div class="input-group">
@@ -36,11 +36,12 @@
                     <x-gesanda::form-addon :addon="$prepend"/>
                 @endif
 
-                <div class="{{$validationClass}} wire-validation " >
-                        <input {{ $attributes->except('wire')->merge([
+                <div class="{{$validationClass}} wire-validation ">
+                    <span wire:ignore>
+                           <input {{ $attributes->except('wire')->merge([
                         'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $wiredKey . '.' . $locale : $wiredKey) : null,
                         'id'                                           => $id,
-                        'class'                                        => 'iti--laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
+                        'class'                                        => ' iti--laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
                         'type'                                         => $type,
                         'name'                                         => $isWired ? null : ($locale ? $name . '[' . $locale . ']' : $name),
                         'placeholder'                                  => $placeholder,
@@ -49,31 +50,34 @@
                         'aria-describedby'                             => $caption ? $id . '-caption' : null,
                         ]) }}
 
-                               data-phone-input-id="{{ $id }}"
-                               data-phone-input-name="{{ $name }}"
-                               data-phone-input="#{{ $id }}"
+                                  data-phone-input-id="{{ $id }}"
+                                  data-phone-input-name="{{ $name }}"
+                                  data-phone-input="#{{ $id }}"
 
-                               @if ($attributes->has('value'))
-                               value="{{ $attributes->get('value') }}"
-                               @endif
+                                  @if ($attributes->has('value'))
+                                  value="{{ $attributes->get('value') }}"
+                                  @endif
 
-                               @if ($attributes->has('phone-country-input'))
-                               data-phone-country-input="{{ $attributes->get('phone-country-input') }}"
-                               @endif
+                                  @if ($attributes->has('phone-country-input'))
+                                  data-phone-country-input="{{ $attributes->get('phone-country-input') }}"
+                                  @endif
 
-                               @if ($attributes->has('placeholder'))
-                               placeholder="{{ $attributes->get('placeholder') }}"
-                               @endif
+                                  @if ($attributes->has('placeholder'))
+                                  placeholder="{{ $attributes->get('placeholder') }}"
+                                  @endif
 
-                               @if ($attributes->has('required'))
-                               required
-                               @endif
+                                  @if ($attributes->has('required'))
+                                  required
+                                  @endif
 
-                               @if ($attributes->has('disabled'))
-                               disabled
-                               @endif
-                               autocomplete="off"
-                        />
+                                  @if ($attributes->has('disabled'))
+                                  disabled
+                                  @endif
+                                  autocomplete="off"
+                           />
+                    </span>
+
+
                 </div>
                 @if(! $prepend && ! $append && $displayFloatingLabel)
                     <x-gesanda::form-label :id="$id" class="form-label" :label="$label"/>

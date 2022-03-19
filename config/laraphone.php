@@ -7,7 +7,6 @@
  * https://github.com/jackocnr/intl-tel-input
  */
 return [
-
     'allowDropdown'           => true,
 
     'autoHideDialCode'        => true,

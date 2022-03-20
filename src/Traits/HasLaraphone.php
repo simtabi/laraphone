@@ -5,7 +5,7 @@ namespace Simtabi\Laraphone\Traits;
 trait HasLaraphone
 {
 
-    public function hydratesLaraphone()
+    public function refreshesLaraphoneInstance()
     {
         $this->dispatchBrowserEvent('telDOMChanged');
     }

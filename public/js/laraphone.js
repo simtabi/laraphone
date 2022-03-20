@@ -100,7 +100,7 @@ if (typeof window.intlTelInput !== 'function') {
         } else {
             if (typeof options.geoIpLookup !== 'function') {
                 throw new TypeError(
-                    `laraphone: Undefined function '${options.geoIpLookup}' specified in tel-input.options.geoIpLookup.`
+                    `Laraphone: Undefined function '${options.geoIpLookup}' specified in tel-input.options.geoIpLookup.`
                 );
             }
             delete options.geoIpLookup; // unset if undefined function
@@ -116,7 +116,7 @@ if (typeof window.intlTelInput !== 'function') {
         } else {
             if (typeof options.customPlaceholder !== 'function') {
                 throw new TypeError(
-                    `laraphone: Undefined function '${options.customPlaceholder}' specified in tel-input.options.customPlaceholder.`
+                    `Laraphone: Undefined function '${options.customPlaceholder}' specified in tel-input.options.customPlaceholder.`
                 );
             }
             delete options.customPlaceholder; // unset if undefined function
@@ -293,7 +293,6 @@ if (typeof window.intlTelInput !== 'function') {
                 renderTelInput();
             });
         }
-
     });
     //
 })();

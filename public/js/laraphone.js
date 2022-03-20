@@ -292,9 +292,6 @@ if (typeof window.intlTelInput !== 'function') {
             window.Livewire.hook('component.initialized', component => {
                 renderTelInput();
             });
-            window.Livewire.hook('message.processed', component => {
-                renderTelInput();
-            });
         }
 
     });

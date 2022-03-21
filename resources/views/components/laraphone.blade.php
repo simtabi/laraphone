@@ -11,11 +11,17 @@
         $validationClass      = !empty($getValidationClass($errors, $locale)) ? $getValidationClass($errors, $locale) : '';
         $isWired              = $componentIsWired();
         $wiredKey             = !empty($getNestedWireKey()) ? $getNestedWireKey().'.'.$name : $name;
+        $wiredModel           = $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $wiredKey . '.' . $locale : $wiredKey) : null;
     @endphp
 
     {{-- Hidden phone input --}}
     <input
-        type="hidden" {{ $attributes->wire('model') }} id="{{ $id }}" name="{{ $name }}"
+        type="hidden"
+        {{ $attributes->except('wire')->merge([
+                    'wire:model'  => $wiredModel,
+                    ]) }}
+
+        id="{{ $id }}" name="{{ $name }}"
         @if ($attributes->has('value'))
         value="{{ $attributes->get('value') }}"
         @endif
@@ -39,15 +45,15 @@
                 <div class="{{$validationClass}} wire-validation ">
                     <span wire:ignore>
                            <input {{ $attributes->except('wire')->merge([
-                        'wire:model' . $getComponentLivewireModifier() => $isWired && ! $hasComponentNativeLivewireModelBinding() ? ($locale ? $wiredKey . '.' . $locale : $wiredKey) : null,
-                        'id'                                           => $id,
-                        'class'                                        => ' iti--laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
-                        'type'                                         => $type,
-                        'name'                                         => $isWired ? null : ($locale ? $name . '[' . $locale . ']' : $name),
-                        'placeholder'                                  => $placeholder,
-                        'data-locale'                                  => $locale,
-                        'value'                                        => $isWired ? null : ($value ?? ''),
-                        'aria-describedby'                             => $caption ? $id . '-caption' : null,
+                        'wire:model'       => $wiredModel,
+                        'id'               => $id,
+                        'class'            => ' iti--laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
+                        'type'             => $type,
+                        'name'             => $isWired ? null : ($locale ? $name . '[' . $locale . ']' : $name),
+                        'placeholder'      => $placeholder,
+                        'data-locale'      => $locale,
+                        'value'            => $isWired ? null : ($value ?? ''),
+                        'aria-describedby' => $caption ? $id . '-caption' : null,
                         ]) }}
 
                                   data-phone-input-id="{{ $id }}"

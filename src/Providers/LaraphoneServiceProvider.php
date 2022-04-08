@@ -11,8 +11,8 @@ use Simtabi\Laraphone\Views\Components\TelInput;
 class LaraphoneServiceProvider extends ServiceProvider
 {
     
-    private const PACKAGE_NAME = 'laraphone';
-    private const PATH         = __DIR__.'/../../';
+    private string $packageName = 'laraphone';
+    private const  PACKAGE_PATH = __DIR__.'/../../';
 
     public static array $cdnAssets = [
         'css'  => [
@@ -37,6 +37,11 @@ class LaraphoneServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->loadTranslationsFrom(self::PACKAGE_PATH . "resources/lang/", $this->packageName);
+        $this->loadMigrationsFrom(self::PACKAGE_PATH.'/../database/migrations');
+        $this->loadViewsFrom(self::PACKAGE_PATH . "resources/views", $this->packageName);
+        $this->mergeConfigFrom(self::PACKAGE_PATH . "config/{$this->packageName}.php", $this->packageName);
+
         $this->app->singleton('laraphone', function () {
             return new Laraphone();
         });
@@ -44,32 +49,9 @@ class LaraphoneServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->mergeConfigFrom(self::PATH.'config/laraphone.php', 'laraphone');
-
-        $this->loadViewsFrom(self::PATH . 'resources/views', self::PACKAGE_NAME);
-        $this->loadTranslationsFrom(self::PATH . 'resources/lang', self::PACKAGE_NAME);
-
         $this->registerBladeComponents();
         $this->declareBladeDirectives();
-
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                self::PATH . 'config/laraphone.php' => config_path('laraphone.php'),
-            ], 'laraphone:config');
-
-            $this->publishes([
-                self::PATH . 'public'               => public_path('vendor/laraphone'),
-            ], 'laraphone:assets');
-
-            $this->publishes([
-                self::PATH . 'resources/views'      => resource_path('views/vendor/laraphone'),
-            ], 'laraphone:views');
-
-            $this->publishes([
-                self::PATH . 'resources/lang'       => resource_path('lang/vendor/courier'),
-            ], 'laraphone:translations');
-        }
-
+        $this->registerConsoles();
     }
 
     private function registerBladeComponents()
@@ -77,8 +59,8 @@ class LaraphoneServiceProvider extends ServiceProvider
         Blade::component('laraphone::input', TelInput::class);
 
         View::composer('laraphone::assets', function ($view) {
-            $view->laraphoneCssPath = self::PATH . 'public/css/laraphone.css';
-            $view->laraphoneJsPath  = self::PATH.'public/js/laraphone.js';
+            $view->laraphoneCssPath = self::PACKAGE_PATH . 'public/css/laraphone.css';
+            $view->laraphoneJsPath  = self::PACKAGE_PATH.'public/js/laraphone.js';
         });
 
         Blade::include('laraphone::scripts', 'laraphoneScripts');
@@ -161,4 +143,30 @@ class LaraphoneServiceProvider extends ServiceProvider
 
         return false;
     }
+
+    private function registerConsoles(): static
+    {
+        if ($this->app->runningInConsole())
+        {
+
+            $this->publishes([
+                self::PACKAGE_PATH . "config/{$this->packageName}.php" => config_path("{$this->packageName}.php"),
+            ], "{$this->packageName}:config");
+
+            $this->publishes([
+                self::PACKAGE_PATH . "public"                          => public_path("vendor/{$this->packageName}"),
+            ], "{$this->packageName}:assets");
+
+            $this->publishes([
+                self::PACKAGE_PATH . "resources/views"                 => resource_path("views/vendor/{$this->packageName}"),
+            ], "{$this->packageName}:views");
+
+            $this->publishes([
+                self::PACKAGE_PATH . "resources/lang"                  => $this->app->langPath("vendor/{$this->packageName}"),
+            ], "{$this->packageName}:translations");
+        }
+
+        return $this;
+    }
+
 }

@@ -16,16 +16,16 @@
 
     {{-- Hidden phone input --}}
     <input
-        type="hidden"
-        {{ $attributes->except('wire')->merge([
-                    'wire:model'  => $wiredModel,
-                    ]) }}
+            type="hidden"
+            {{ $attributes->except('wire')->merge([
+                        'wire:model' . $getComponentLivewireModifier()  => $wiredModel,
+             ]) }}
 
-        id="{{ $id }}" name="{{ $name }}"
-        @if ($attributes->has('value'))
-        value="{{ $attributes->get('value') }}"
-        @endif
-        autocomplete="off"
+            id="{{ $id }}" name="{{ $name }}"
+            @if ($attributes->has('value'))
+                value="{{ $attributes->get('value') }}"
+            @endif
+            autocomplete="off"
     >
 
     {{-- Tel input --}}
@@ -45,7 +45,7 @@
                 <div class="{{$validationClass}} wire-validation ">
                     <span wire:ignore>
                            <input {{ $attributes->except('wire')->merge([
-                        'wire:model'       => $wiredModel,
+                        'wire:model' . $getComponentLivewireModifier() => $wiredModel,
                         'id'               => $id,
                         'class'            => ' iti--laraphone form-control ' .$validationClass. ' ' . $attributes->get('class'),
                         'type'             => $type,
@@ -61,23 +61,23 @@
                                   data-phone-input="#{{ $id }}"
 
                                   @if ($attributes->has('value'))
-                                  value="{{ $attributes->get('value') }}"
+                                      value="{{ $attributes->get('value') }}"
                                   @endif
 
                                   @if ($attributes->has('phone-country-input'))
-                                  data-phone-country-input="{{ $attributes->get('phone-country-input') }}"
+                                      data-phone-country-input="{{ $attributes->get('phone-country-input') }}"
                                   @endif
 
                                   @if ($attributes->has('placeholder'))
-                                  placeholder="{{ $attributes->get('placeholder') }}"
+                                      placeholder="{{ $attributes->get('placeholder') }}"
                                   @endif
 
                                   @if ($attributes->has('required'))
-                                  required
+                                      required
                                   @endif
 
                                   @if ($attributes->has('disabled'))
-                                  disabled
+                                      disabled
                                   @endif
                                   autocomplete="off"
                            />
